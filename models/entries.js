@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Entries = sequelize.define("Entries", {
     title: {
       type: DataTypes.STRING,
@@ -13,8 +13,13 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
+    },
+    isTrashed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
-  });   
+  });
 
   //backward relation btw entries and journals
   Entries.associate = models => {
@@ -27,9 +32,9 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
-//not sure we need it but still good to know that we can have it.
- //backward relation btw entries and users
- /* Entries.associate = models => {
+  //not sure we need it but still good to know that we can have it.
+  //backward relation btw entries and users
+  /* Entries.associate = models => {
   // An entry belongs to a user
   // and can't be created without a user id associate as the foreign key constraint
   Entries.belongsTo(models.Users, {

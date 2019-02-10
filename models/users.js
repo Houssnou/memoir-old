@@ -21,6 +21,13 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
+     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len:[6,10]
+      }
+    },
     profile:{
       type: DataTypes.STRING,
       allowNull: true,
@@ -29,6 +36,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
   //defining the association of the users and journals
   Users.associate = models =>{
     // Associating Users with Journals
@@ -46,6 +54,5 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });  
   };
-
   return Users;
 };

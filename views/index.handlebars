@@ -1,0 +1,111 @@
+<!-- nav bar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-outline-danger my-2 my-sm-0 mr-2" data-target="#login-modal" data-toggle="modal">Login</button>
+  <button class="btn btn-outline-danger my-2 my-sm-0" data-target="#signup-modal" data-toggle="modal">SignIn</button>
+</nav>
+<!-- end nav bar -->
+<!-- jumbotron -->
+<div class="container">
+  <div class="jumbotron my-4 text-center">
+    <h1 class="display-4">Your personal memoir</h1>
+    <p class="lead">This is a Node, Express, MySQL and express-handlebars powered note-taking application.</p>
+    <hr class="my-4">
+    <p>It uses Express to handle routing and server HTML as well as JSON, MySQL to store data, and jQuery for AJAX
+      requests and handling other front-end logic.</p>
+    <br>
+    Additional technologies:
+    <ul class="list-unstyled">
+      <li>Bootstrap group list items
+    </ul>
+    <br>
+
+  </div>
+</div>
+<!-- end jumbotron -->
+{{!-- login modal --}}
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-image: linear-gradient(-90deg, white, grey)">
+        <h5 class="modal-title align-center" id="update-modal-title">Log in </h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+              <button type="button" class="btn btn-outline-danger" id="password" a href="#">Forget password? </button>
+            </div>
+            <div class="form-group col-md-6 ">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end login modal -->
+{{!-- signup modal --}}
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="Signup-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-image: linear-gradient(-90deg, white, grey)">
+        <h5 class="modal-title align-center" id="signup-modal-title">Sign in </h5>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="firstName-input" aria-describedby="firstName" placeholder="Enter your first Name">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="lasttName-input" aria-describedby="lastName" placeholder="Enter your last Name">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Email address">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input type="password" class="form-control" id="password-input" aria-describedby="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input type="password" class="form-control" id="passwordConfirmation-input" aria-describedby="passwordConfirmation"
+                placeholder="Password Confirmation">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          </div></div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- end signup modeal --}}
+<script src="assets/js/login.js"></script>
+<script src="assets/js/signup.js"></script>
