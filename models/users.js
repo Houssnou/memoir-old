@@ -1,3 +1,6 @@
+//importing bcrypt fro password hashing
+const bcryptjs = require('bcryptjs');
+
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("Users", {
     lastName: {
@@ -28,13 +31,25 @@ module.exports = function(sequelize, DataTypes) {
         len:[6,10]
       }
     },
-    profile:{
+    photo:{
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
         isUrl: true
       }
     }
+  });
+
+  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+  Users.prototype.validPassword = function (password) {
+    return bcryptjs.compareSync(password, this.password);
+  };
+
+  // Hooks are automatic methods that run during various phases of the User Model lifecycle
+  // In this case, before a User is created, we will automatically hash their password
+  Users.hook("beforeCreate", function (user) {
+    user.password = bcryptjs.hashSync(user.password, bcryptjs.genSaltSync(10), null);
+    console.log(user);
   });
 
   //defining the association of the users and journals
