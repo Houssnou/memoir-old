@@ -17,6 +17,7 @@ module.exports = {
   //check if user is logged in
   userCheck: function (req, res) {
     if (req.user) {
+      console.log(req.user);
       return res.json(req.user);
     } else {
       return res.status(422).json({
@@ -52,7 +53,7 @@ module.exports = {
   },
   login: function (req, res) {
     console.log(req.user);
-    res.json("/");
+    res.json("/journals");
   },
 
   //update a user /:id
