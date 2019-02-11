@@ -1,16 +1,26 @@
-$(document).ready(function() {
+$(document).ready(function () {
   console.log("login ready");
+  //event listener for a click on login
+  $("#loginBtn").on("click", function (event) {
 
+    event.preventDefault();
 
-  $("#loginBtn").on("click", function() {
-    console.log("you clicked me");
+    const userInfo = {
+      email: $("#email-input").val().trim(),
+      password: $("#password-input").val().trim()
+    };
 
-    let loginEmail = $("#loginEmail").val().trim();
-    let loginPass = $("#loginPass").val().trim();
-    
-    console.log(loginEmail);
-    console.log(loginPass);
-   
-  })
+    console.log(userInfo);
+    //ajax call to login the user
+    $.ajax({
+        url: "api/users/login",
+        method: "POST",
+        data: userInfo
+      })
+      .then((userInfo) => {
+        location.replace(userInfo)
+      })
+      .catch(err => console.log(err));
+  });
 
-})
+});
