@@ -3,7 +3,7 @@ const journalsController = require("../../controllers/journalController");
 
 // methods for /api/journals/:userId (GET) 
 router
-  .route("/:userId")
+  .route("/users/:userId")
   .get(journalsController.getAllJournals);
 
 // methods for /api/journals (POST) 

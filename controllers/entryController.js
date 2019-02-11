@@ -29,7 +29,7 @@ module.exports = {
       .Entries
       .create({
         title: req.body.title,
-        body: req.body.description,
+        body: req.body.body,
         JournalId: req.body.journalId,
         UserId: req.body.userId
       })
