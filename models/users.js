@@ -1,5 +1,5 @@
 //importing bcrypt fro password hashing
-const bcrypt = require("bcrypt-nodejs");
+const bcryptjs = require('bcryptjs');
 
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("Users", {
