@@ -1,32 +1,48 @@
-//import models dependency
-const db = require("../models");
-
 module.exports = {
-  //select all users
-  getAllUsers: (req, res) => {
+    //select all users
+    getAllUsers: (req, res) => {
+      db
+        .Users
+        .findAll()
+        .then(dbUsers => {
+          res.json(dbUsers);
+
+        })
+        .catch(err => {
+          console.log("Select All Error: " + err);
+          res.status(400).json(err);
+        });
+    },
+
+    //add a user where we will make use of all passport and others sh*t
+    register: function(req, res) {
     db
-      .Users
-      .findAll()
-      .then(dbUsers => {
-        res.json(dbUsers);
-
-      })
-      .catch(err => {
-        console.log("Select All Error: " + err);
-        res.status(400).json(err);
-      });
+    .Users
+    .create(req.body)
+    .then(function (userInfo) {
+      // Upon successful signup, log user in
+      req
+        .login(userInfo, function (err) {
+          if (err) {
+            console.log(err)
+            return res
+              .status(422)
+              .json(err);
+          }
+          console.log(req.user);
+          return res.json("/");
+        });
+    })
+    .catch(function (err) {
+      console.log(err);
+      res
+        .status(422)
+        .json(err);
+    });
   },
-
-  //add a user
-  addUser: (req, res) => {
-    //console.log (req.body)
-    db.Users.create().then(result => {
-        res.json(result)
-      })
-      .catch(err => {
-        console.log("Create User Error: " + err);
-        res.status(400).json(err);
-      });
+  login: function (req, res) {
+    console.log(req.user);
+    res.json("/");
   },
 
   //update a user /:id
