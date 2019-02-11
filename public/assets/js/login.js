@@ -6,8 +6,8 @@ $(document).ready(function () {
     event.preventDefault();
 
     const userInfo = {
-      email: $("#email-input").val().trim(),
-      password: $("#password-input").val().trim()
+      email: $("#loginEmail").val().trim(),
+      password: $("#loginPass").val().trim()
     };
 
     console.log(userInfo);
@@ -18,6 +18,7 @@ $(document).ready(function () {
         data: userInfo
       })
       .then((userInfo) => {
+        console.log(userInfo);
         location.replace(userInfo)
       })
       .catch(err => console.log(err));
