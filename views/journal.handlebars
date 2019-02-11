@@ -29,15 +29,17 @@
   <div class="sidenav mdb-color">
     <div class="container-fluid">
       <div class="font-weight-bold text-light">
-        <br><br>
-        <p>Journal 1</p>
-        <p>Journal 2</p>
-        <p>Journal 3</p>
-        <p>Journal 4</p>
-        <p>Journal 5</p>
-        <p>work memos</p>
-        <p>home memos</p>
-        <p>financial </p>
+        <br><br> {{!-- These two BR tags are necessary --}}
+        <button class="btn btn-primary btn-sm" id="create-journal">Add journal</button>
+        <div class="journalEntries">
+          <a class="btn btn-success btn-sm" href="#" class="text-white">test</a>
+          <a class="btn btn-success btn-sm btn-sm">1</a>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -46,7 +48,7 @@
     <div class="card" id="pageCard">
       <div class="row">
         <div class="col-sm-4 col-3" id="listedEntries">
-          <button class="btn btn-success btn-block" id="create-journal">ADD ENTRY</button>
+          {{!-- <button class="btn btn-success btn-block" id="create-journal">ADD ENTRY</button> --}}
           <div id="list-example" class="list-group">
 
             <a class="list-group-item list-group-item-action active" href="#list-item-1"><span
