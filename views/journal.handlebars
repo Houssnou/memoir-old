@@ -29,17 +29,10 @@
   <div class="sidenav mdb-color">
     <div class="container-fluid">
       <div class="font-weight-bold text-light">
-        <br><br> {{!-- These two BR tags are necessary --}}
-        <button class="btn btn-primary btn-sm" id="create-journal">Add journal</button>
-        <div class="journalEntries">
-          <a class="btn btn-success btn-sm" href="#" class="text-white">test</a>
-          <a class="btn btn-success btn-sm btn-sm">1</a>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
+        <br><br><br><br>
+        <div id="list-journals" class="list-group">
+
         </div>
-        
       </div>
     </div>
   </div>
@@ -47,43 +40,59 @@
   <div class="container-fluid mt-3" id="contentBody">
     <div class="card" id="pageCard">
       <div class="row">
-        <div class="col-sm-4 col-3" id="listedEntries">
-          {{!-- <button class="btn btn-success btn-block" id="create-journal">ADD ENTRY</button> --}}
-          <div id="list-example" class="list-group">
-
-            <a class="list-group-item list-group-item-action active" href="#list-item-1"><span
-                class="entrySpan">Entry</span>
-              1</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-2"><span class="entrySpan">Entry</span>
-              2</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-3"><span class="entrySpan">Entry</span>
-              3</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-4"><span class="entrySpan">Entry</span>
-              4</a>
+        <div class="col-sm-4 col-3" id="listedEntries" style="display:none">
+          <button class="btn btn-success btn-block" id="create-journal">ADD Journal</button>
+          <button class="btn btn-success btn-block" id="create-entry">ADD Entry</button>
+          <div id="list-entries" class="list-group">
+            
           </div>
-        </div>    
+        </div>
       </div>
       {{!-- new journal form --}}
       <form style="display:none" id="journal-form">
         <div class="row">
           <div class="col-8">
-            <div class="md-form mb-5">             
+            <div class="md-form mb-5">
               <input type="text" id="title-input" class="form-control validate">
               <label data-error="wrong" data-success="right" for="title-input">Title</label>
             </div>
-          </div>          
+          </div>
         </div>
         <div class="row">
           <div class="col-8">
-            <div class="md-form mb-5">              
+            <div class="md-form mb-5">
               <input type="text" id="description-input" class="form-control validate">
               <label data-error="wrong" data-success="right" for="description-input">Description</label>
             </div>
-          </div>          
+          </div>
         </div>
-         <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-deep-orange" id="save-journal"> Save Journal</button>
-      </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-deep-orange" id="save-journal"> Save Journal</button>
+        </div>
+      </form>
+      {{!-- end form
+       --}}
+      {{!-- new entry form --}}
+      <form style="display:none" id="entry-form">
+        <div class="row">
+          <div class="col-8">
+            <div class="md-form mb-5">
+              <input type="text" id="entry-title" class="form-control validate">
+              <label data-error="wrong" data-success="right" for="title-input">Title</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="md-form mb-5">
+              <input type="text" id="entry-body" class="form-control validate">
+              <label data-error="wrong" data-success="right" for="description-input">Body</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-deep-orange" id="save-entry"> Save Entry</button>
+        </div>
       </form>
       {{!-- end form
        --}}
@@ -99,4 +108,3 @@
   </div>
   <!-- Copyright -->
 </footer>
-
