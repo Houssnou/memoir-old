@@ -55,6 +55,10 @@
   width: 200px;
 }
 
+#journal-form {
+  display: none;
+}
+
 #journalContent{
   position: relative;
   overflow-y: scroll;

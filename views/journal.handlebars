@@ -27,51 +27,49 @@
 <!-- SIDEBAR HERE -->
 <div class="container-fluid">
   <div class="sidenav mdb-color">
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
       <div class="font-weight-bold text-light">
-        <br><br><br><br>
-        <div id="list-journals" class="list-group">
-
-        </div>
+        <br><br>
+        <a button class="btn btn-mdb-color btn-block" id="create-journal">ADD Journal</a>
+        <a button class="btn btn-mdb-color btn-block" id="create-entry">ADD Entry</a>
+        <div id="list-journals" class="list-group text-center"></div> {{!-- Stuff dynamically appears here --}}
       </div>
     </div>
   </div>
 
   <div class="container-fluid mt-3" id="contentBody">
-    <div class="card" id="pageCard">
+    <div class="card blue-grey lighten-3" id="pageCard">
       <div class="row">
-        <div class="col-sm-4 col-3" id="listedEntries" style="display:none">
-          <button class="btn btn-success btn-block" id="create-journal">ADD Journal</button>
-          <button class="btn btn-success btn-block" id="create-entry">ADD Entry</button>
+        <div class="col-sm-4 col-3" id="listedEntries" style="">
           <div id="list-entries" class="list-group">
-            
+
           </div>
         </div>
       </div>
       {{!-- new journal form --}}
-      <form style="display:none" id="journal-form">
-        <div class="row">
-          <div class="col-8">
+      <form class="" id="journal-form">
+
+        <div class="container w-50">
+          <div class="card blue-grey grey lighten-2">
+            <div class="card-title pt-2 text-center">Add new journal</div>
             <div class="md-form mb-5">
               <input type="text" id="title-input" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="title-input">Title</label>
+              <label class="font-weight-bold" for="title-input">Title</label>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
+
             <div class="md-form mb-5">
               <input type="text" id="description-input" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="description-input">Description</label>
+              <label class="font-weight-bold" for="description-input">Description</label>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center">
+              <button class="btn btn-deep-orange" id="save-journal"> Save Journal</button>
             </div>
           </div>
         </div>
-        <div class="modal-footer d-flex justify-content-center">
-          <button class="btn btn-deep-orange" id="save-journal"> Save Journal</button>
-        </div>
       </form>
-      {{!-- end form
-       --}}
+      {{!-- end form --}}
+
       {{!-- new entry form --}}
       <form style="display:none" id="entry-form">
         <div class="row">
