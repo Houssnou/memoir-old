@@ -1,3 +1,5 @@
+/* I need to reoragnize this area by page first then class/id then alphabetically. ahhh */
+
 .sidenav {
   height: 100%;
   width: 160px;
@@ -28,7 +30,6 @@
 
 #listedEntries {
   padding-right: 0%; 
-
 }
 
 #writtenEntries {
@@ -71,12 +72,30 @@
 }
 
 #pageCard{
-  height: 535px;
-  
+  height: 600px;
 }
 
 #registerArea {
   margin-bottom: 0%;
+}
+
+#entry-card {
+  margin-left: 12%;
+  width: 95%;
+}
+#entry-form {
+  margin-bottom: 5px;
+}
+
+#entry-title {
+  margin-bottom: 5px;
+}
+
+#entry-body {
+  width: 95%;
+  margin-left: 20px;
+  resize: none;
+  border: none;
 }
 
 @media screen and (max-width: 530px) {
