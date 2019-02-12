@@ -41,7 +41,7 @@
     <div class="card blue-grey lighten-3" id="pageCard">
       <div class="row">
         <div class="col-sm-4 col-3" id="listedEntries" style="">
-          <div id="list-entries" class="list-group">
+          <div id="list-entries" class="list-group w-50">
 
           </div>
         </div>
@@ -73,16 +73,18 @@
       {{!-- new entry form --}}
       <form style=" " id="entry-form">
         <div class="container">
-          <div class="card grey lighten-2">
-            <div class="md-form mb-5">
+          <div class="card grey lighten-2 mt-3" id="entry-card">
+            <div class="md-form" id="entry-form">
               <input type="text" id="entry-title" class="form-control validate">
               <label data-error="wrong" data-success="right" for="title-input">Title</label>
             </div>
           
         
-            <div class="md-form mb-5">
-              <input type="text" id="entry-body" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="description-input">Body</label>
+            <div class="md-form">
+              {{!-- <input type="text" id="entry-body" class="form-control validate">
+              <label data-error="wrong" data-success="right" for="description-input">Body</label> --}}
+              
+              <textarea name="" id="entry-body" cols="30" rows="14" placeholder="WRITE"></textarea>
             </div>
         
 
