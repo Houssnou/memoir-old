@@ -162,25 +162,19 @@ const updateSidenav = () => { //i copy n paste
     userId = userInfo.id;
     userName = userInfo.lastName;
 
-    //on load display all users journals
     $.ajax({
       url: "/api/journals/users/" + userId,
       method: "GET"
     }).then(bdJournals => {
-      console.log("All user Journals");
-      console.log(bdJournals);
-      //build the list of the journal for the right side of the navbar
-      //create the listitem
+  
       bdJournals.forEach((journal, index) => {
-        //create the item as a list item 
+
         const journalItem = $(`<a class='mdb-color list-group-item list-group-item-action' href='#list-item-${index}'>`);
 
-        //save the journal data with the attr method to be able to get all the entries attached to this journal 
         journalItem.attr("data-id", journal.id);
 
         const journalItemSpan = $("<span class='entrySpan'>").text(journal.title).appendTo(journalItem);
-
-        //then append it to the div id="list-journals"
+        
         $("#list-journals").append(journalItem);
       });
     });
