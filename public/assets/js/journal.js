@@ -1,7 +1,7 @@
 $(document).ready(() => {
   //global variables to store the user infos 
-  let userId;
-  let userName;
+  var userId;
+  var userName;
   //ajax call to display the user informations
   $.ajax({
       url: "/api/users/status",
@@ -25,7 +25,7 @@ $(document).ready(() => {
         //create the listitem
         bdJournals.forEach((journal, index) => {
           //create the item as a list item 
-          const journalItem = $(`<a class='list-group-item list-group-item-action' href='#list-item-${index}'>`);
+          const journalItem = $(`<a class='mdb-color list-group-item list-group-item-action' href='#list-item-${index}'>`);
 
           //save the journal data with the attr method to be able to get all the entries attached to this journal 
           journalItem.attr("data-id", journal.id);
@@ -44,7 +44,8 @@ $(document).ready(() => {
   //event listener for a click on create new journal
   $("#create-journal").on("click", () => {
     //display the form to input the journal title and the description
-    $("#journal-form").show();
+    // if #journal-form display:none === true then click will show else on click will hide
+     $("#journal-form").toggle();
 
   });
   //event listener for a click on add new journal
@@ -73,6 +74,11 @@ $(document).ready(() => {
       $("#description-input").val("");
       //then hide the form again
       $("#journal-form").hide();
+      
+      // clear list of journals then use a loop to make the list appear again
+      $("#list-journals").empty();
+      updateSidenav();
+
     });
   });
 
@@ -99,7 +105,7 @@ $(document).ready(() => {
       dbEntries.forEach((entry, index) => {
         //create the item as a list item 
         const entryItem = $(`<a class='list-group-item list-group-item-action' href='#list-item-${index}'>`);
-
+      
         //save the journal data with the attr method to be able to get all the entries attached to this journal 
         entryItem.attr("data-id", entry.id);
 
@@ -143,7 +149,44 @@ $(document).ready(() => {
       });
     });
 
-  });
+  }); 
 
 
-});
+
+const updateSidenav = () => { //i copy n paste
+  $.ajax({
+    url: "/api/users/status",
+    method: 'GET'
+  }).then(function (userInfo) {
+   
+    userId = userInfo.id;
+    userName = userInfo.lastName;
+
+    $.ajax({
+      url: "/api/journals/users/" + userId,
+      method: "GET"
+    }).then(bdJournals => {
+  
+      bdJournals.forEach((journal, index) => {
+
+        const journalItem = $(`<a class='mdb-color list-group-item list-group-item-action' href='#list-item-${index}'>`);
+
+        journalItem.attr("data-id", journal.id);
+
+        const journalItemSpan = $("<span class='entrySpan'>").text(journal.title).appendTo(journalItem);
+        
+        $("#list-journals").append(journalItem);
+      });
+    });
+
+  })
+  .catch(err => console.log(err));
+}
+
+
+
+
+
+
+
+}); //end of .ready

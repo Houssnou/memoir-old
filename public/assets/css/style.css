@@ -1,12 +1,3 @@
-#listedEntries {
-  padding-right: 0%; 
-
-}
-
-#writtenEntries {
-  padding-left: 0%;
-}
-
 .sidenav {
   height: 100%;
   width: 160px;
@@ -35,6 +26,15 @@
   padding: 0px 10px;
 }
 
+#listedEntries {
+  padding-right: 0%; 
+
+}
+
+#writtenEntries {
+  padding-left: 0%;
+}
+
 #modalLoginBtn {
   padding: 10px 20px;
   text-align: center;
@@ -55,6 +55,10 @@
   width: 200px;
 }
 
+#journal-form {
+  display: none;
+}
+
 #journalContent{
   position: relative;
   overflow-y: scroll;
@@ -68,6 +72,7 @@
 
 #pageCard{
   height: 535px;
+  
 }
 
 #registerArea {
@@ -81,22 +86,22 @@
 }
 
 @media screen and (max-width: 576px) {
-  .sidenav {
+  /* .sidenav {
     display: none;
-  }
+  } */
  .container-fluid#contentBody {
    margin: auto;
    padding: auto;
  }
 }
 
+
 @media screen and (max-width: 1300px) {
-  .sidenav {
-    display: none;
-  }
 
   .container-fluid#contentBody {
     margin: auto;
+    margin-left: 18%;
     padding: auto;
+    width: 75%;
   }
 }
