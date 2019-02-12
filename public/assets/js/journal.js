@@ -20,20 +20,83 @@ $(document).ready(() => {
       }).then(bdJournals => {
         console.log("All user Journals");
         console.log(bdJournals);
-        //build the list of the journal for the right side of the navbar
-        //<a class="list-group-item list-group-item-action" href="#list-item-2"><span class="entrySpan">Journal 1</span></a>
-        //create the listitem
+
         bdJournals.forEach((journal, index) => {
-          //create the item as a list item 
-          const journalItem = $(`<a class='mdb-color list-group-item list-group-item-action' href='#list-item-${index}'>`);
+          //accordion is just a card with header and body so lets have fun.          
+          //build the card
 
-          //save the journal data with the attr method to be able to get all the entries attached to this journal 
-          journalItem.attr("data-id", journal.id);
+          const $card = $("<card>");
 
-          const journalItemSpan = $("<span class='entrySpan'>").text(journal.title).appendTo(journalItem);
+          //the header
+          const $cardheader = $(`<div class='card-header text-align' role='tab' id='heading${index+1}'>`);
+          //div row to wrap the line : title dates actions
+          //inside the header we will have a row with 3colums 2-8-2
+          const $row = $("<div class='row align-items-center'>");
+          const $colTitle = $("<div class='col-2 d-flex align-content-start'>");
+          const $colDates = $("<div class='col-8 d-flex align-content-start'>");
+          const $colActions = $("<div class='col-1 d-flex justify-content-end'>");
 
-          //then append it to the div id="list-journals"
-          $("#list-journals").append(journalItem);
+          //inline style to be removed later #collapse-link {color: black; font-weight: bold; text-decoration: none;
+          //button to make the title clikable
+          const $buttonTitle = $(
+            `<a data-parent='#journals-accordion' href='#journal${index+1}' 
+                            data-toggle='collapse' data-target='#journal${index+1}'
+                            aria-expanded='true' aria-controls='journal${index+1}'
+                            style='color: black; font-weight: bold; text-decoration: none'
+                            >`
+          ).text(journal.title).appendTo($colTitle);
+
+          //build the line //build the line: entry 1 created: modified edit and suppress icon 
+          const $spanCreated = $("<span class='mr-2'>").text("Created :").appendTo($colDates);
+          const $spanCreatedContent = $("<span style='font-weight: bold'>").text(` ${moment(journal.createdAt).format("ddd, MMM Do YYYY, h:mm a")}`).appendTo($colDates);
+          const $spanLastAccess = $("<span class='mx-2'>").text("Last access :").appendTo($colDates);
+          const $spanLastAccessContent = $("<span style='font-weight: bold'>").text(`  ${moment(journal.updatedAt).format("ddd, MMM Do YYYY, h:mm a")}`).appendTo($colDates);
+
+          //$("<i class='fas fa-edit'>") <i class="fas fa-book-open"></i>
+          const $numEntries = $("<span style='color: black; font-weight: bold'>").text("4").appendTo($colActions);
+          const $entries = $("<a href='./entries' class='fas fa-book-open text-success mr-2'>").appendTo($colActions);
+          const $update = $("<span class='fas fa-edit text-warning mr-2'>").appendTo($colActions);
+          const $delete = $("<span class='fas fa-trash-alt text-danger'>").appendTo($colActions);
+
+          //link the data to the button to be able to use it on click on the button
+          $update
+            .attr("id", "update");
+          /* .attr("data-toggle", "modal")
+          .attr("data-target", "#update-modal"); */
+
+          $delete
+            .attr("id", "delete");
+          /* .attr("data-toggle", "modal")
+          .attr("data-target", "#delete-modal"); */
+
+          // Using the data method to append more data 
+          $entries.data("data-journal", journal);
+          $update.data("data-journal", journal);
+          $delete.data("data-journal", journal);
+
+          //append them to the 
+          //$cardheader.append($buttonTitle, $spanCreated, $spanModified, $update, $delete);
+          $row.append($colTitle, $colDates, $colActions);
+          $cardheader.append($row);
+
+          //the body
+          const $divCollapse = $(
+            `<div id='journal${index+1}' aria-labelledby='heading${index+1}'  role='tabpanel' data-parent='#journals-accordion'>`);
+
+          //quick check to determine if it should be a class collapse show or not        
+          (index === 0) ? $divCollapse.addClass("collapse show"): $divCollapse.addClass("collapse");
+
+          const $cardBody = $("<div class='card-body'>");
+
+          //adding a div to display the content of the editor
+          const $divContent = $("<p>").append(journal.description).appendTo($cardBody);
+
+          $cardBody.appendTo($divCollapse);
+
+          //build the card content
+          $card.append($cardheader, $divCollapse).appendTo("#journals-accordion");
+
+          console.log("end");
         });
       });
 
@@ -41,13 +104,7 @@ $(document).ready(() => {
     .catch(err => console.log(err));
 
 
-  //event listener for a click on create new journal
-  $("#create-journal").on("click", () => {
-    //display the form to input the journal title and the description
-    // if #journal-form display:none === true then click will show else on click will hide
-     $("#journal-form").toggle();
 
-  });
   //event listener for a click on add new journal
   $("#save-journal").on("click", (e) => {
     //prevent reload
@@ -69,15 +126,14 @@ $(document).ready(() => {
       data: journalData
     }).then(result => {
       console.log(result);
+
       //empty the input fields
       $("#title-input").val("");
       $("#description-input").val("");
-      //then hide the form again
-      $("#journal-form").hide();
-      
-      // clear list of journals then use a loop to make the list appear again
-      $("#list-journals").empty();
-      updateSidenav();
+      //then hide the modal
+      $("#addJournal-modal").hide();
+
+      location.reload();
 
     });
   });
@@ -105,7 +161,7 @@ $(document).ready(() => {
       dbEntries.forEach((entry, index) => {
         //create the item as a list item 
         const entryItem = $(`<a class='list-group-item list-group-item-action' href='#list-item-${index}'>`);
-      
+
         //save the journal data with the attr method to be able to get all the entries attached to this journal 
         entryItem.attr("data-id", entry.id);
 
@@ -149,39 +205,39 @@ $(document).ready(() => {
       });
     });
 
-  }); 
+  });
 
 
 
-const updateSidenav = () => { //i copy n paste
-  $.ajax({
-    url: "/api/users/status",
-    method: 'GET'
-  }).then(function (userInfo) {
-   
-    userId = userInfo.id;
-    userName = userInfo.lastName;
-
+  const updateSidenav = () => { //i copy n paste
     $.ajax({
-      url: "/api/journals/users/" + userId,
-      method: "GET"
-    }).then(bdJournals => {
-  
-      bdJournals.forEach((journal, index) => {
+        url: "/api/users/status",
+        method: 'GET'
+      }).then(function (userInfo) {
 
-        const journalItem = $(`<a class='mdb-color list-group-item list-group-item-action' href='#list-item-${index}'>`);
+        userId = userInfo.id;
+        userName = userInfo.lastName;
 
-        journalItem.attr("data-id", journal.id);
+        $.ajax({
+          url: "/api/journals/users/" + userId,
+          method: "GET"
+        }).then(bdJournals => {
 
-        const journalItemSpan = $("<span class='entrySpan'>").text(journal.title).appendTo(journalItem);
-        
-        $("#list-journals").append(journalItem);
-      });
-    });
+          bdJournals.forEach((journal, index) => {
 
-  })
-  .catch(err => console.log(err));
-}
+            const journalItem = $(`<a class='mdb-color list-group-item list-group-item-action' href='#list-item-${index}'>`);
+
+            journalItem.attr("data-id", journal.id);
+
+            const journalItemSpan = $("<span class='entrySpan'>").text(journal.title).appendTo(journalItem);
+
+            $("#list-journals").append(journalItem);
+          });
+        });
+
+      })
+      .catch(err => console.log(err));
+  }
 
 
 

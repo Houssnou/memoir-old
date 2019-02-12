@@ -1,6 +1,6 @@
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark unique-color-dark lighten-1 sticky-top">
-  <a class="navbar-brand" href="#">Home</a>
+  <a class="navbar-brand" href="./journals">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
     aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,9 +14,9 @@
           <img src="https://via.placeholder.com/30" class="rounded-circle z-depth-0" alt="avatar image">
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
-          <a class="dropdown-item" href="#">Account</a>
-          <a class="dropdown-item" href="#">FAQs and Help</a>
-          <a class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#accountModal">Account</a>
+          <a class="dropdown-item border-bottom" href="#" data-toggle="modal" data-target="#faqModal">FAQ & Help</a>
+          <a class="dropdown-item" href="./">Logout</a> {{!-- MODAL HTML STARTS AROUND LINE 116 --}}
         </div>
       </li>
     </ul>
@@ -27,90 +27,54 @@
 <!-- SIDEBAR HERE -->
 <div class="container-fluid">
   <div class="sidenav mdb-color">
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
       <div class="font-weight-bold text-light">
         <br><br>
-        <p>Journal 1</p>
-        <p>Journal 2</p>
-        <p>Journal 3</p>
-        <p>Journal 4</p>
-        <p>Journal 5</p>
-        <p>work memos</p>
-        <p>home memos</p>
-        <p>financial </p>
+        <div id="list-journals" class="list-group text-center"></div> {{!-- Stuff dynamically appears here --}}
       </div>
     </div>
   </div>
-
   <div class="container-fluid mt-3" id="contentBody">
-    <div class="card" id="pageCard">
+    <div class="card blue-grey lighten-3" id="pageCard">
       <div class="row">
-        <div class="col-sm-4 col-3" id="listedEntries">
-          <div id="list-example" class="list-group">
-            <a class="list-group-item list-group-item-action active" href="#list-item-1"><span
-                class="entrySpan">Entry</span>
-              1</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-2"><span class="entrySpan">Entry</span>
-              2</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-3"><span class="entrySpan">Entry</span>
-              3</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-4"><span class="entrySpan">Entry</span>
-              4</a>
+        <div class="col-sm-3 col-3" id="listedEntries">
+          <a button class="btn btn-mdb-color btn-block my-4 mx-2" id="create-entry">ADD Entry</a>
+          <div id="list-entries" class="list-group w-50">
+            {{!-- list of entries generated dynamically --}}
           </div>
         </div>
-        <div class="col-sm-8 col-9" id="writtenEntries">
-          <div data-spy="scroll" data-target="#list-example" data-offset="0"
-            class="container-fluid scrollspy-example z-depth-1" id="journalContent">
-            <h4 id="list-item-1">Entry 1 </h4>
-            <p>Disrupt direct trade jean shorts franzen. Gentrify mustache quinoa, salvia taxidermy blog pug forage
-              intelligentsia. Beard street art direct trade, listicle ethical hammock bushwick tilde celiac af
-              lumbersexual migas raw denim. Hot chicken hoodie mixtape marfa disrupt kitsch flannel succulents.
-            </p>
-            <h4 id="list-item-2">Entry 2</h4>
-            <p>Godard gentrify kogi, leggings helvetica asymmetrical lomo keytar. Selvage VHS organic four loko
-              meggings actually umami live-edge stumptown migas jean shorts post-ironic ethical. Copper mug craft
-              beer food truck aesthetic pug chicharrones forage everyday carry. Ugh live-edge freegan lumbersexual
-              cronut mlkshk lomo copper mug, cred selfies banjo blue bottle cray tumblr. Hammock artisan 8-bit edison
-              bulb readymade. Sriracha venmo shabby chic godard.
 
-              +1 meditation af VHS fashion axe four dollar
-              toast disrupt slow-carb typewriter hashtag quinoa ennui. Intelligentsia jianbing irony hashtag ennui
-              enamel pin chambray air plant raw denim.
-
-              Iceland hell of biodiesel single-origin coffee tbh. Pop-up marfa helvetica aesthetic squid, pug salvia
-              tote bag chartreuse semiotics mustache prism yr. Fashion axe crucifix tbh single-origin coffee, tote
-              bag kombucha gentrify humblebrag activated charcoal. Bespoke hashtag master cleanse tousled, adaptogen
-              austin normcore fashion axe.</p>
-            <h4 id="list-item-3">Entry 3</h4>
-            <p>You probably haven't heard of them vegan lyft keytar iceland butcher, typewriter four loko hell of
-              messenger bag ethical small batch man braid gentrify. Iceland subway tile everyday carry pinterest
-              prism slow-carb kombucha crucifix PBR&B letterpress blue bottle plaid pickled man braid. Enamel pin
-              portland leggings heirloom. Woke dreamcatcher shaman vaporware hashtag iceland tattooed. Cardigan tacos
-              lumbersexual, selfies pop-up aesthetic unicorn man braid typewriter tousled cold-pressed twee chillwave
-              meh drinking vinegar. Cardigan letterpress chicharrones XOXO snackwave lomo hell of authentic tattooed
-              selfies. Gentrify unicorn pug thundercats roof party butcher iPhone tote bag 3 wolf moon everyday carry
-              coloring book.
-              pickled banh mi irony pitchfork occupy art party humblebrag
-              lomo small batch.</p>
-            <h4 id="list-item-4">Item 4</h4>
-            <p>Thundercats shabby chic YOLO, scenester franzen waistcoat hoodie freegan. Celiac readymade food truck
-              art party pour-over portland. Hoodie locavore gentrify everyday carry, twee hashtag skateboard pork
-              belly gastropub selvage tousled williamsburg c
-
-              Lumbersexual synth swag cornhole green juice skateboard, jianbing chillwave meggings. Hell of migas
-              dreamcatcher tousled gentrify selvage. Leggings gluten-free flannel man bun flexitarian authentic vinyl
-              wayfarers tattooed portland lomo. Meh shabby chic tousled farm-to-table iPhone actually edison bulb
-              health goth pinterest synth PBR&B helvetica next level flannel. Fixie ennui flexitarian hexagon direct
-              trade bicycle rights brooklyn tbh viral freegan 90's microdosing synth prism hammock. Craft beer edison
-              bulb single-origin coffee waistcoat viral ugh.
-            </p>
-          </div>
+        <div class="col-sm-8 col-9" id="newEntry">
+          {{!-- new entry form --}}
+          <form style="" id="entry-form">
+            <div class="card grey lighten-2 mt-3" id="entry-card">
+              <div class="md-form" id="entry-form">
+                <div class="row">
+                  <div class="col-10">
+                    <input type="text" id="entry-title" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="title-input">Title</label>
+                  </div>
+                  <div class="col-2">
+                    <i class="fas fa-save"></i>
+                    <i class="fas fa-trash-alt"></i>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea name="" id="entry-body" cols="30" rows="20" placeholder="WRITE"></textarea>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </form>
+          {{!-- end form--}}
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
+
 
 <!-- Footer -->
 <footer class="page-footer font-small stylish-color-dark fixed-bottom">
@@ -119,3 +83,145 @@
   </div>
   <!-- Copyright -->
 </footer>
+
+
+{{!-- 🤔🤔🤔🤔🤔🤔🤔🤔THIS IS WHERE I THREW ALL THE MODAL STUFF 🤔🤔🤔🤔🤔🤔🤔🤔🤔--}}
+<!-- Account Modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-fluid" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="accountModalTitle">Account Stuff</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- INSERT ACCOUNT CHANGE STUFF HERE -->
+
+        <div class="container">
+          <!-- Extended material form grid -->
+          <form>
+            <!-- Grid row -->
+            <div class="form-row">
+              <!-- Grid column -->
+
+              <div class="col-md-6">
+                <!-- Material input -->
+                <div class="md-form form-group">
+                  <input type="email" class="form-control" id="inputEmail4MD" placeholder="Email">
+                  <label for="inputEmail4MD">Email</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <!-- Material input -->
+                <div class="md-form form-group">
+                  <input type="password" class="form-control" id="inputPassword4MD" placeholder="Password">
+                  <label for="inputPassword4MD">Password</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="row">
+              <!-- Grid column -->
+              <div class="col-md-12">
+                <!-- Material input -->
+                <div class="md-form form-group">
+                  <input type="text" class="form-control" id="inputAddressMD" placeholder="1234 Main St">
+                  <label for="inputAddressMD">Address</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-12">
+                <!-- Material input -->
+                <div class="md-form form-group">
+                  <input type="text" class="form-control" id="inputAddress2MD"
+                    placeholder="Apartment, studio, or floor">
+                  <label for="inputAddress2MD">Address 2</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="form-row">
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <!-- Material input -->
+                <div class="md-form form-group">
+                  <input type="text" class="form-control" id="inputCityMD" placeholder="New York City">
+                  <label for="inputCityMD">City</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <!-- Material input -->
+                <div class="md-form form-group">
+                  <input type="text" class="form-control" id="inputZipMD" placeholder="11206-1117">
+                  <label for="inputZipMD">Zip</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+            {{!-- <button type="submit" class="btn btn-primary btn-md">Sign in</button> --}}
+          </form>
+          <!-- Extended material form grid -->
+        </div>
+
+
+
+
+
+
+        <!-- END ACCUONT MODAL -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔 Account modal end 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔 -->
+<!-- FAQ MODAL -->
+<!-- Central Modal large -->
+<div class="modal fade" id="faqModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="modalFaqTitle">FAQ</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>FAQ stuff here</h4>
+        <p>Q: What is this?</p>
+        <p>A: Stuff</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FAQ Modal Large END-->
