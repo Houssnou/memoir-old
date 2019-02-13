@@ -1,20 +1,8 @@
 $(document).ready(() => {
-
-  //to get the value of the Editor
-  let editorContent;
-
-  ClassicEditor
-    .create(document.querySelector('#entry-body'))
-    .then(editor => {
-      console.log(editor);
-      editorContent = editor;
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  // 
-
   $("#newEntry").hide();
+  $("#create-entry").hide();
+
+  let editorContent;
 
   //global variables to store the user infos 
   let userId;
@@ -64,13 +52,14 @@ $(document).ready(() => {
   $(document).on("click", ".journal", function (event) {
 
     //get the id of the journal tru the data-id
-    const journalId = $(this).attr("journal-id");
+    journalId = $(this).attr("journal-id");
+
+    //display the button to create the a new entry
+    $("#create-entry").show();
 
     //empty the current lsit
     $("#list-entries").empty();
 
-    console.log(journalId);
-    console.log(userId);
     //display the button to create a new entry
     $("#listedEntries").show();
 
@@ -79,7 +68,9 @@ $(document).ready(() => {
       url: "/api/entries/journals/" + journalId,
       method: "GET"
     }).then(dbEntries => {
+      console.log(`All user - ${userId} - journalId -${journalId}- entries:${dbEntries.length} `)
       console.log(dbEntries);
+
       //build the list of the journal for the right side of the navbar
       //<a class="list-group-item list-group-item-action" href="#list-item-2"><span class="entrySpan">Journal 1</span></a>
       //create the listitem
@@ -90,6 +81,8 @@ $(document).ready(() => {
         //save the journal data with the attr method to be able to get all the entries attached to this journal 
         entryItem.data("data-entry", entry);
 
+        //set the attr entry-id to the delete icon
+        $(".fa-trash-alt").attr("entry-id", entry.id);
 
         const entryItemSpan = $("<span class='entrySpan'>").text(entry.title).appendTo(entryItem);
 
@@ -116,37 +109,82 @@ $(document).ready(() => {
     console.log(entryData);
 
     //ajax call to display all entries for a journal
-    /*  $.ajax({
-       url: "/api/entries",
-       method: "POST",
-       data: entryData
-     }).then(result => {
-       console.log(result);
-       //just refresh page for proof of concept
-       location.reload();
-     }); */
+    $.ajax({
+      url: "/api/entries",
+      method: "POST",
+      data: entryData
+    }).then(result => {
+      console.log(result);
+      //just refresh page for proof of concept
+      location.reload();
+    });
   });
 
+  //event listener for a click on delete entry
+  $(".fa-trash-alt").on("click", function (e) {
+    //prevent reload
+    e.preventDefault();
 
+    const entryId = $(this).attr("entry-id");
+
+    //confirm delete entry;
+    $(document).on("click", "#confirm-delete", function (event) {
+      console.log(entryId);
+      //ajax call to update the entry isTrashed column
+      $.ajax({
+        url: "/api/entries/" + entryId,
+        method: "DELETE",
+      }).then(result => {
+        alert("Entry deleted!");
+        location.reload();
+      });
+    });
+  });
 
   //event listener for a click on an entry item
   $(document).on("click", ".entry", function (event) {
-
     //get the id of the journal tru the data-id
     const entry = $(this).data("data-entry");
-    console.log(entry);
 
-    $("#newEntry").show();
-    $("#entry-title").val(entry.title);
-
-
-    editor.setData(entry.body);
+    //delete the editor
+    $("#entry-div").empty();
+    //create the text area 
+    $("#entry-div").append("<textarea id='entry-body' cols='30' rows='20'>");
 
 
-    //ajax call to display the entry data
+    ClassicEditor
+      .create(document.querySelector("#entry-body"))
+      .then(editor => {
+        //console.log(editor);
+        $("#newEntry").show();
+        $("#entry-title").val(entry.title);
+        editor.setData(entry.body);
+        editorContent = editor;
+
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
   });
   //event listener for a click on create-entry
   $("#create-entry").on("click", () => {
+
     $("#newEntry").show();
+
+    $("#entry-title").val("");
+
+    //to get the value of the Editor
+    ClassicEditor
+      .create(document.querySelector('#entry-body'))
+      .then(editor => {
+        console.log(editor);
+        editorContent = editor;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    // 
+
   });
-}); //end of .ready
+}); //end of
