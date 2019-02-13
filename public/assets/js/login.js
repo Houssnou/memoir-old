@@ -21,7 +21,11 @@ $(document).ready(function () {
         console.log(userInfo);
         location.replace(userInfo)
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        console.log("incorrect user info");
+        $("#loginError").text("Incorrect login information. Please try again.");
+      })
   });
 
 });
