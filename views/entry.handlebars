@@ -7,7 +7,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item text-white">Hi <span id="userName"> Admin</span></li>
+      <li class="nav-item text-white pt-3">Hi <span id="userName"> Admin</span></li>
       <li class="nav-item avatar dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
@@ -30,7 +30,9 @@
     <div class="container-fluid mb-5">
       <div class="font-weight-bold text-light">
         <br><br>
-        <div id="list-journals" class="list-group text-center"></div> {{!-- Stuff dynamically appears here --}}
+        <div id="list-journals" class="list-group text-center">
+        {{!-- Stuff dynamically appears here --}}
+        </div> 
       </div>
     </div>
   </div>
@@ -49,7 +51,7 @@
           <form style="" id="entry-form">
             <div class="card grey lighten-2 mt-3" id="entry-card">
               <div class="md-form" id="entry-form">
-                <div class="row">
+                <div class="row ml-2">
                   <div class="col-10">
                     <input type="text" id="entry-title" class="form-control validate">
                     <label data-error="wrong" data-success="right" for="title-input">Title</label>
@@ -225,3 +227,4 @@
   </div>
 </div>
 <!-- FAQ Modal Large END-->
+<script src="/assets/js/entry.js"></script>

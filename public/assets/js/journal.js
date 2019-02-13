@@ -207,5 +207,11 @@ $("#accoutSavings").on("click", () => {
        $("tbody").append("<tr><td>"+title+"</td><td>"+description+"</td></tr>");
        alert("Record added successfully");  
   }
+<<<<<<< HEAD
 })})
 })
+=======
+
+
+}); //end of .ready
+>>>>>>> master
