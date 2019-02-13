@@ -31,5 +31,9 @@ router
   .put(usersController.changePassword)
   .delete(usersController.deleteUser);
 
+router
+   .route("/accountinfo")
+   .post(usersController.accountInfo)
+
 
 module.exports = router;

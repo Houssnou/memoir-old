@@ -191,11 +191,21 @@ $("#accoutSavings").on("click", () => {
   const address = $("#inputAddressMD").val().trim();
   const address2 =$("#inputAddress2MD").val().trim();
   const inputCity= $("#inputCityMD").val().trim();
-  const inputCity= $("#inputZipMD").val().trim();
+  const inputZip= $("#inputZip").val().trim();
   const inputAccount= $("#inputAccountSave").val().trim();
+  console.log(email);
+
+
+ $.ajax({
+  url: '/ajax-requestPost',
+  type: 'POST',
+  data: {email: email, title: title, address: address, address2:address2, City:inputCity, zip:inputZip, account: inputAccount},
+  error: function() {
+     alert('error');
+  },
+  success: function(data) {
+       $("tbody").append("<tr><td>"+title+"</td><td>"+description+"</td></tr>");
+       alert("Record added successfully");  
+  }
+})})
 })
-
-
-
-
-}); //end of .ready
