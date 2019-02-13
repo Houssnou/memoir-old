@@ -184,7 +184,16 @@ const updateSidenav = () => { //i copy n paste
 }
 
 
-
+//Marian
+$("#accoutSavings").on("click", () => {
+  const email = $("#inputEmail4MD").val().trim();
+  const passWord =$("#inputPassword4MD").val().trim();
+  const address = $("#inputAddressMD").val().trim();
+  const address2 =$("#inputAddress2MD").val().trim();
+  const inputCity= $("#inputCityMD").val().trim();
+  const inputCity= $("#inputZipMD").val().trim();
+  const inputAccount= $("#inputAccountSave").val().trim();
+})
 
 
 
