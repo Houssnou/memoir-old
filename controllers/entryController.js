@@ -16,10 +16,8 @@ module.exports = {
              JournalId: req.params.journalId
             },
              { isTrashed:false}
-          ]
-        
-        
-       },
+          ]        
+        },
         include: [db.Journals]
       })
       .then(dbEntries => {

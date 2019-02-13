@@ -82,7 +82,8 @@ $(document).ready(() => {
         entryItem.data("data-entry", entry);
 
         //set the attr entry-id to the delete icon
-        $(".fa-trash-alt").attr("entry-id", entry.id);
+        //$(".fa-save").attr("entry-id", entry.id);
+        //$(".fa-trash-alt").attr("entry-id", entry.id);
 
         const entryItemSpan = $("<span class='entrySpan'>").text(entry.title).appendTo(entryItem);
 
@@ -94,7 +95,7 @@ $(document).ready(() => {
   });
 
   //event listener for a click on save entry
-  $(".fa-save").on("click", (e) => {
+  $(".fa-save").on("click", function (e) {
     //prevent reload
     e.preventDefault();
 
@@ -108,8 +109,14 @@ $(document).ready(() => {
     };
     console.log(entryData);
 
+    const entryId = $(this).attr("entry-id");
+
+    console.log(entryId)
+
     //ajax call to display all entries for a journal
-    $.ajax({
+     if(!entryId){ //if entryID doesnt exist its a new entry
+      console.log("Doesnt exist");
+      $.ajax({
       url: "/api/entries",
       method: "POST",
       data: entryData
@@ -118,6 +125,20 @@ $(document).ready(() => {
       //just refresh page for proof of concept
       location.reload();
     });
+  }else{
+    //its an update
+    console.log("exits.");
+    console.log(entryId)
+    $.ajax({
+      url: "/api/entries/"+entryId,
+      method: "PUT",
+      data: entryData
+    }).then(result => {
+      console.log(result);
+      //just refresh page for proof of concept
+      location.reload();
+    });
+  }
   });
 
   //event listener for a click on delete entry
@@ -125,19 +146,19 @@ $(document).ready(() => {
     //prevent reload
     e.preventDefault();
 
-    const entryId = $(this).attr("entry-id");
+    const entryId = $(this).data("data-entry");
 
     //confirm delete entry;
     $(document).on("click", "#confirm-delete", function (event) {
       console.log(entryId);
       //ajax call to update the entry isTrashed column
-      $.ajax({
+      /* $.ajax({
         url: "/api/entries/" + entryId,
         method: "DELETE",
       }).then(result => {
         alert("Entry deleted!");
         location.reload();
-      });
+      }); */
     });
   });
 
@@ -146,11 +167,15 @@ $(document).ready(() => {
     //get the id of the journal tru the data-id
     const entry = $(this).data("data-entry");
 
+    console.log(entry);
+    //append entry info to the buttons
+    $(".fa-save").attr("entry-id", entry.id);
+    $(".fa-trash-alt").attr("entry-id", entry.id);
+
     //delete the editor
     $("#entry-div").empty();
     //create the text area 
     $("#entry-div").append("<textarea id='entry-body' cols='30' rows='20'>");
-
 
     ClassicEditor
       .create(document.querySelector("#entry-body"))
@@ -173,6 +198,11 @@ $(document).ready(() => {
     $("#newEntry").show();
 
     $("#entry-title").val("");
+
+    //delete the editor
+    $("#entry-div").empty();
+    //create the text area 
+    $("#entry-div").append("<textarea id='entry-body' cols='30' rows='20'>");
 
     //to get the value of the Editor
     ClassicEditor
