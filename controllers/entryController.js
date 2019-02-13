@@ -3,11 +3,29 @@ const db = require("../models");
 
 
 module.exports = {
-  //select all entries from the selected journal
+//select all entries from the selected journal
   getAllEntries: (req, res) => {
     db
       .Entries
       .findAll({
+        where: {
+          JournalId: req.params.journalId
+        },
+        include: [db.Journals]
+      })
+      .then(dbEntries => {
+        res.json(dbEntries);
+      })
+      .catch(err => {
+        console.log("Select All Error: " + err);
+        res.status(400).json(err);
+      });
+  },
+  //select one specfic entryfrom the selected journal
+  getOneEntry: (req, res) => {
+    db
+      .Entries
+      .findOne({
         where: {
           JournalId: req.params.journalId
         },
