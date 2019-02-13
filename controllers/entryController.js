@@ -1,5 +1,7 @@
 //import models dependency
 const db = require("../models");
+//sequelized operator AND
+const Op = require("sequelize").Op;
 
 
 module.exports = {
@@ -9,8 +11,15 @@ module.exports = {
       .Entries
       .findAll({
         where: {
-          JournalId: req.params.journalId
-        },
+          [Op.and] : [
+            {          
+             JournalId: req.params.journalId
+            },
+             { isTrashed:false}
+          ]
+        
+        
+       },
         include: [db.Journals]
       })
       .then(dbEntries => {
@@ -87,7 +96,7 @@ module.exports = {
     db
       .Entries
       .update({
-        isTrashed: req.body.isTrashed
+        isTrashed: true
       }, {
         where: {
           id: req.params.id
